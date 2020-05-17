@@ -8,134 +8,244 @@ namespace _16._05._2020csharpabstraction
     {
         static void Main(string[] args)
         {
-            Redactor redactor = new Redactor("test.txt");
-            redactor.Open();
-            redactor.Edit();
-            redactor.Save();
+            //Redactor redactor = new Redactor("test.txt");
+            //redactor.Open();
+            //redactor.Edit();
+            //redactor.Save();
+
+
+            Player player = new Player();
+            //(player as IRecord).Stop();
+            IRecord record = player;
+            record.Stop();
+            IPlay play = player;
+            play.Stop();
+
         }
     }
 
-    abstract class AbsrtractHandler
+
+    interface IRecord
     {
-        public abstract void Save();
-        public abstract void Open();
-        public abstract void Edit();
-
-
-        protected string name;
-        public  AbsrtractHandler(string name)
-        {
-            this.name = name;
-        }
+        void Record();
+        void Stop();
     }
 
-    class XMLHandler : AbsrtractHandler
+    interface IPlay
     {
-        public XMLHandler(string name) :base(name){}
-
-       
-        public override void Edit()
-        {
-            Console.WriteLine($"{name}XML file edited");
-        }
-
-        public override void Open()
-        {
-            Console.WriteLine($"{name}XML file opened");
-        }
-
-        public override void Save( )
-        {
-            Console.WriteLine($"{name}XML file saved");
-        }
+        void Play();
+        void Stop();
     }
 
-    class TXTHandler : AbsrtractHandler
+    class Player : IRecord, IPlay
     {
-        public TXTHandler(string name) : base(name) { }
-
-        public override void Edit()
+        public void Play()
         {
-            Console.WriteLine($"{name}TXT file edited");
+            Console.WriteLine("Play");
         }
 
-        public override void Open()
+        public void Record()
         {
-            Console.WriteLine($"{name}TXT file opened");
+            Console.WriteLine("Record");
         }
 
-        public override void Save( )
+        void IPlay.Stop()
         {
-            Console.WriteLine($"{name}TXT file saved");
+            Console.WriteLine("Play stop");
         }
-    }
-    class HTMLHandler : AbsrtractHandler
-    {
-        public HTMLHandler(string name) : base(name) { }
-
-        public override void Edit()
+        void IRecord.Stop()
         {
-            Console.WriteLine($"{name}HTML file edited");
-        }
-
-        public override void Open()
-        {
-            Console.WriteLine($"{name}HTML file opened");
-        }
-
-        public override void Save( )
-        {
-            Console.WriteLine($"{name}HTML file saved");
+            Console.WriteLine("Record stop");
         }
     }
 
-    class Redactor
-    {
-        string str="";
-        string name = "";
+    //interface IPlay
+    //{
+    //    void Play();
+    //}
 
-        AbsrtractHandler handler;
-        public Redactor(string filename)
-        {
-            str = filename.Substring(filename.IndexOf('.') + 1);
-            name= filename.Substring(0,filename.IndexOf('.') + 1);
-            switch (str)
-            {
-                case "txt":
-                    handler = new TXTHandler(name);
-                    break;
-                case "html":
-                    handler = new HTMLHandler(name);
-                    break;
-                case "xml":
-                    handler = new XMLHandler(name);
-                    break;
-                default:
-                    break;
-            }
-        }
+    //interface IStop
+    //{
+    //    void Stop();
+    //}
 
-        public void Open()
-        {
-            handler.Open();
-        }
+    //class DVDPlayer : IPlay, IStop
+    //{
+    //    public void Play()
+    //    {
+    //        Console.WriteLine("Walkman start");
+    //    }
 
-        public void Save()
-        {
-            handler.Save();
-        }
+    //    public void Stop()
+    //    {
+    //        Console.WriteLine("Walkman  stop");
+    //    }
+    //}
 
-        public void Edit()
-        {
-            handler.Edit();
-        }
-    }
+    //class Walkman : IPlay, IStop
+    //{
+    //    public void Play()
+    //    {
+    //        Console.WriteLine("DVD player start");
+    //    }
+
+    //    public void Stop()
+    //    {
+    //        Console.WriteLine("DVD player stop");
+    //    }
+    //}
 
 
+    //interface IStart
+    //{
+    //    void Func();
+    //    int Action();
+    //}
+
+
+    //interface IRun
+    //{
+    //    void Run();
+    //}
+
+    //class Start : IStart , IRun
+    //{
+    //    public int Action()
+    //    {
+    //        return 0;
+    //    }
+
+    //    public void Func()
+    //    {
+
+    //    }
+
+    //    public void Run()
+    //    {
+
+    //    }
+    //}
 
 
 
 
+
+
+    //abstract class AbsrtractHandler
+    //{
+    //    public abstract void Save();
+    //    public abstract void Open();
+    //    public abstract void Edit();
+
+
+    //    protected string name;
+    //    public  AbsrtractHandler(string name)
+    //    {
+    //        this.name = name;
+    //    }
+    //}
+
+    //class XMLHandler : AbsrtractHandler
+    //{
+    //    public XMLHandler(string name) :base(name){}
+
+
+    //    public override void Edit()
+    //    {
+    //        Console.WriteLine($"{name}XML file edited");
+    //    }
+
+    //    public override void Open()
+    //    {
+    //        Console.WriteLine($"{name}XML file opened");
+    //    }
+
+    //    public override void Save( )
+    //    {
+    //        Console.WriteLine($"{name}XML file saved");
+    //    }
+    //}
+
+    //class TXTHandler : AbsrtractHandler
+    //{
+    //    public TXTHandler(string name) : base(name) { }
+
+    //    public override void Edit()
+    //    {
+    //        Console.WriteLine($"{name}TXT file edited");
+    //    }
+
+    //    public override void Open()
+    //    {
+    //        Console.WriteLine($"{name}TXT file opened");
+    //    }
+
+    //    public override void Save( )
+    //    {
+    //        Console.WriteLine($"{name}TXT file saved");
+    //    }
+    //}
+    //class HTMLHandler : AbsrtractHandler
+    //{
+    //    public HTMLHandler(string name) : base(name) { }
+
+    //    public override void Edit()
+    //    {
+    //        Console.WriteLine($"{name}HTML file edited");
+    //    }
+
+    //    public override void Open()
+    //    {
+    //        Console.WriteLine($"{name}HTML file opened");
+    //    }
+
+    //    public override void Save( )
+    //    {
+    //        Console.WriteLine($"{name}HTML file saved");
+    //    }
+    //}
+
+    //class Redactor
+    //{
+    //    string str="";
+    //    string name = "";
+
+    //    AbsrtractHandler handler;
+    //    public Redactor(string filename)
+    //    {
+    //        str = filename.Substring(filename.IndexOf('.') + 1);
+    //        name= filename.Substring(0,filename.IndexOf('.') + 1);
+    //        switch (str)
+    //        {
+    //            case "txt":
+    //                handler = new TXTHandler(name);
+    //                break;
+    //            case "html":
+    //                handler = new HTMLHandler(name);
+    //                break;
+    //            case "xml":
+    //                handler = new XMLHandler(name);
+    //                break;
+    //            default:
+    //                break;
+    //        }
+    //    }
+
+    //    public void Open()
+    //    {
+    //        handler.Open();
+    //    }
+
+    //    public void Save()
+    //    {
+    //        handler.Save();
+    //    }
+
+    //    public void Edit()
+    //    {
+    //        handler.Edit();
+    //    }
+    //}
 
 
 
